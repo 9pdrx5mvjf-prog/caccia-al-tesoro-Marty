@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>caccia all'uovo digitale</title>
+
+    <style>
+        body{ font-family: sans-serif; text-align: center; background-color: #f0fff0; padding: 50px;}
+
+        .step {display: none; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);max-width: 400px; margin: auto;}
+
+        .active {display: block;}
+
+        input {width: 80%; padding: 12px; margin: 10px 0; border: 2px solid #4f2ea8a4; border-radius: 15px;outline: none;}
+
+        button {padding: 10px 20px; background-color: #4f2ea8a4; border: none; cursor: pointer; border-radius: 5px; color: black;}
+
+        h3 {color: #d35400; padding: 5px;}
+
+        h2{color: #4f2ea8a4; padding: 10px 0 10px;}
+
+        h1 { padding: 5px; text-align: center; }
+
+        img {width: 100%; border-radius: 10px;}
+
+        .separatori {color: black;}
+
+        .testo-segreto{opacity: 0; transition: opacity 0.5s ease; color:black}
+
+        .testo-segreto:hover{opacity: 1;}
+
+    </style>
+</head>
+<body>
+
+     <div id="livello1" class="step active">
+        <h1>BENVENUTA</h1>
+        <h1>🦋Martina🦋</h1>
+        <h1>nella caccia al tesoro🐣</h1>
+        <img src="uovo_pasqua.png" width="600px">
+        <h3>pensavi fosse facile ricevere il tuo Uovo....bhe non lo sarà!!🌷</h3>
+        <h2 class="separatori">o-o-o-o-o-o-o-o-o-o-o-o-o-o-o</h2>
+        <h2>se sei pronta per cominciare la caccia al tesoro digita "si"</h2>
+        <input type="text" id="ans1" placeholder="Risposta...">
+        <br>
+        <button onclick="vaiAl(2, 'si', 'ans1')">Verifica</button>
+    </div>
+
+       <div id="livello2" class="step">
+        <h4 class="testo-segreto"><strong>1L0V3U</strong></h4>
+        <h2>bene, inizia la sfida!!⚔️⚔️</h2>
+        <h2>o-o-o-o-o-o-o</h2>
+        <h3> Livello 1 della caccia al tesoro</h3>
+        <p>domanda facile, tu Martina, sei una principessa bellissima?</p>
+        <input type="text" id="ans2" placeholder="Risposta...">
+        <br>
+        <button onclick="vaiAl(3, 'si', 'ans2')">Verifica</button>
+    </div>
+
+      <div id="livello3" class="step">
+        <h4>bene! continuiamo</h4>
+        <h3> 🐣Livello 2 della caccia al tesoro</h3>
+        <p>Sono tondo, ma non sono una palla. Se mi rompi, faccio la frittata. Chi sono?</p>
+        <input type="text" id="ans3" placeholder="Risposta...">
+        <br>
+        <button onclick="vaiAl(4, 'uovo', 'ans3')">Verifica</button>
+    </div>
+
+    <div id="livello4" class="step">
+        <h4>bene hai indovinato, proseguiamo</h4>
+        <h2>🐰 Livello 3 della caccia al tesoro</h2>
+        <p>sono piccolo e salto in alto, se ti vedo scappo. cosa sono?</p>
+        <input type="text" id="ans4" placeholder="Risposta...">
+        <br>
+        <button onclick="vaiAl(5, 'coniglio', 'ans4')">Verifica</button>
+    </div>
+
+     <div id="livello5" class="step">
+        <h4>Ci sei quasi!!</h4>
+        <h2> 🥕 Livello 4 della caccia al tesoro</h2>
+        <p>il dono che ti ho portato è speciale, il suo gusto saprai indovinare?</p>
+        <input type="text" id="ans5" placeholder="inserisci il gusto speciale dell'uovo">
+        <br>
+        <button onclick="vaiAl(6, 'cocco', 'ans5')">Verifica</button>
+    </div>
+
+    <div id="livello6" class="step">
+        <h4>Ci sei quasi!!</h4>
+        <h2> Bene!! ecco l'ultima sfida📃</h2>
+        <p>per scoprire dove si trova l'uovo devi inserire il codice segreto</p>
+        <p>come! non hai visto nessun codice segreto; controlla meglio negli indovinelli passati, ti sei persa qualcosa forse</p>
+        <input id="ans6" placeholder="inserisci il codice segreto">
+        <br>
+        <button onclick="vaiAl(7, '1L0V3U', 'ans6')">Verifica</button>
+    </div>
+
+    <div id="livello7" class="step">
+        <h2>🎉 Complimenti!</h2>
+        <p>Hai vinto! Il tuo regalo è nascosto... <b>vicino a dove lo studio diventa realtà</b></p>
+        <img src="uovo_misterioso.png">
+
+    </div>
+
+    <script>
+function vaiAl(prossimoLivello, risposteCorrette, idInput) {
+    let userAns = document.getElementById(idInput).value.toLowerCase().trim();
+
+    // Se risposteCorrette è una singola parola, trasformala in array
+    if (!Array.isArray(risposteCorrette)) {
+        risposteCorrette = [risposteCorrette];
+    }
+
+    // Controlla se la risposta contiene una delle parole corrette
+    let ok = risposteCorrette.some(r => userAns.includes(r.toLowerCase()));
+
+    if (ok) {
+        // Nascondi tutti i livelli
+        let tutti = document.getElementsByClassName('step');
+        for (let i = 0; i < tutti.length; i++) {
+            tutti[i].classList.remove('active');
+        }
+        // Mostra quello nuovo
+        document.getElementById('livello' + prossimoLivello).classList.add('active');
+    } else {
+        alert("Riprova! La risposta non è corretta 🥕");
+    }
+}
+</script>
+    
+
+</body>
+</html>
+
